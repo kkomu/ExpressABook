@@ -61,10 +61,7 @@ exports.login = function(req,res) {
                 res.redirect('/contacts');
             }
             else {
-                res.render('error',{
-                    message: err.message,
-                    error: err
-                });
+                res.render('index',{ error: "Incorrect password!" });
             }
         }
     });

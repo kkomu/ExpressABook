@@ -11,3 +11,7 @@ a {
   margin: 0 auto;
   background: #eee;
 }
+#main {
+  color: #f00;
+  text-align: center;
+}
