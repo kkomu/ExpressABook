@@ -11,8 +11,9 @@ block content
       p Phone number: #{contact.phone}
       p Birthday: #{contact.birthday}
       p General info: #{contact.general}
-      a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete 
-
+      a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
+      br
+      a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete
   br
   a(href="/addContact") Add new contact
   br

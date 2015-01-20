@@ -27,7 +27,8 @@ var contactSchema = new mongoose.Schema({
     address: String,
     email: String,
     phone: String,
-    birthday: Date,
+    //birthday: Date,
+    birthday: String,
     general: String
 });
 var contactModel = mongoose.model("Contacts", contactSchema);
@@ -66,7 +67,6 @@ exports.login = function(req,res) {
                 });
             }
         }
-        
     });
 }
 
@@ -121,35 +121,68 @@ exports.registerUser = function(req,res) {
     });
 }
 
-// Save new contact to mongodb
+// Save new/updated contact to mongodb
 exports.saveContact = function(req, res) {
+    
     if(req.session.username) {
         console.log(req.body);
+        
+        // Updating old contact if 'id' is found from req.body
+        if(req.body.id) {
+            var conditions = { _id: req.body.id };
+            var update = { $set: {
+                name: req.body.name,
+                address: req.body.address,
+                email: req.body.email,
+                phone: req.body.phonenumber,
+                birthday: req.body.birthday,
+                general: req.body.general             
+            }};
+            var options = { upsert: true };
 
-        var contact = new contactModel({
-            user: req.session.username,
-            name: req.body.name,
-            address: req.body.address,
-            email: req.body.email,
-            phone: req.body.phonenumber,
-            birthday: new Date(req.body.birthday),
-            general: req.body.general
-        });
+            contactModel.update(conditions, update, options, function(err) {
+                if(err) {
+                    console.log(err);
+                    res.render('error',{
+                        message: err.message,
+                        error: err
+                    });
+                }
+                else {
+                    console.log("OK");
+                    res.redirect('/contacts');
+                }
+            
+            });
+        }
+        // Create new contact
+        else {
+            var contact = new contactModel({
+                user: req.session.username,
+                name: req.body.name,
+                address: req.body.address,
+                email: req.body.email,
+                phone: req.body.phonenumber,
+                //birthday: new Date(req.body.birthday),
+                birthday: req.body.birthday,
+                general: req.body.general
+            });
+        
+            contact.save(function(err) {
+                if(err) {
+                    console.log(err);
+                    res.render('error',{
+                        message: err.message,
+                        error: err
+                    });
+                }
+                else {
+                    console.log("OK");
+                    res.redirect('/contacts');
+                }
 
-        contact.save(function(err) {
-            if(err) {
-                console.log(err);
-                res.render('error',{
-                    message: err.message,
-                    error: err
-                });
-            }
-            else {
-                console.log("OK");
-                res.redirect('/contacts');
-            }
-
-        });
+            });
+        }
     }
     else {
         res.redirect('/');
@@ -210,4 +243,25 @@ exports.contactInfo = function(req,res) {
             res.render('contactinfo',data);
         }
     });
+}
+
+// Edit contact information
+exports.editContact = function(req,res) {
+    console.log("Edit");
+    //res.redirect('/contacts');
+    contactModel.findById(req.query.id, function(err, data) {
+        if(err) {
+            console.log(err);
+            res.render('error',{
+                message: err.message,
+                error: err
+            });
+        }
+        else {
+            console.log(data);
+            // Use new contact template with predefined data
+            res.render('newcontact',data);
+        }
+    });
+
 }

@@ -17,6 +17,7 @@ router.get('/register', function(req, res) {
   res.render('register', {});
 });
 
+/* GET form for new contact */
 router.get('/addContact', function(req, res) {
   res.render('newcontact', {});
 });

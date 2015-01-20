@@ -3,27 +3,33 @@ extends layout
 block content
   h1 New address
   form(action="/saveContact",method="post",data-ajax="false")
+    input(type="hidden",name="id",value=(_id?_id:""))
     label Name
     br
-    input(type="text",name="name")
+    //input(type="text",name="name",value="#{name}")
+    input(type="text",name="name",value=(name?name:""))
     br
     label Address
     br
-    input(type="text",name="address")
+    input(type="text",name="address",value=(address?address:""))
     br
     label Email
     br
-    input(type="text",name="email")
+    input(type="text",name="email",value=(email?email:""))
     br
     label Number
     br
-    input(type="number",name="phonenumber")
+    input(type="number",name="phonenumber",value=(phone?phone:""))
     br
     label Birthday
-    input(type="Date",name="birthday")
+    input(type="Date",name="birthday",value=(birthday?birthday:""))
+    //input(type="Date",name="birthday",value="#{birthday.format("YYYY-MM-DD")}")
     br
     label General
     br
-    textarea(name="general")
+    //textarea(name="general")
+    textarea(name="general")= (general?general:"")
     br
     input(type="submit",value="Send")
+    br
+    //p #{birthday.toDateString()}

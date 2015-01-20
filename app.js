@@ -39,6 +39,7 @@ app.use('/login', db.login);
 app.use('/saveContact', db.saveContact);
 app.use('/contacts', db.contacts);
 app.use('/logout', db.logout);
+app.use('/editContact', db.editContact);
 app.use('/deleteContact', db.deleteContact);
 app.use('/contactInfo', db.contactInfo);
 
