@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div(class="container")
+    h1 Addressbook
+    br
+    form(action="/login",method="post",data-ajax="false")
+      input(type="text",name="username",placeholder="Username")
+      br
+      input(type="password",name="password",placeholder="Password")
+      br
+      input(type="submit",value="Login")
+      br
+    p Not registered yet?
+    a(href="/register") Register here

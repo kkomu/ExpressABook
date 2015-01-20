@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  h1 #{name}
+
+  p Address: #{address}
+  p eMail: #{email}
+  p Phone number: #{phone}
+  p Birthday: #{birthday}
+  p General info: #{general}
+  
+  br
+  a(href="/deleteContact/?id=" + _id,data-ajax="false") Delete
+  br
+  a(href="/contacts") Back to contacts

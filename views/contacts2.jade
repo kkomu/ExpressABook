@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Contacts
+  input(type='text',data-type='search',id='test')
+  each contact in contact_data
+    div(data-role="collapsible",data-filter="true",data-input='#test')
+      h3= contact.name
+      p Address: #{contact.address}
+      p eMail: #{contact.email}
+      p Phone number: #{contact.phone}
+      p Birthday: #{contact.birthday}
+      p General info: #{contact.general}
+      a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete 
+
+  br
+  a(href="/addContact") Add new contact
+  br
+  a(href="/logout") Logout

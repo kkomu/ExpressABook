@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  h1 New address
+  form(action="/saveContact",method="post",data-ajax="false")
+    label Name
+    br
+    input(type="text",name="name")
+    br
+    label Address
+    br
+    input(type="text",name="address")
+    br
+    label Email
+    br
+    input(type="text",name="email")
+    br
+    label Number
+    br
+    input(type="number",name="phonenumber")
+    br
+    label Birthday
+    input(type="Date",name="birthday")
+    br
+    label General
+    br
+    textarea(name="general")
+    br
+    input(type="submit",value="Send")
