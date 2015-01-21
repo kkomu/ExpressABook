@@ -29,3 +29,5 @@ block content
     a(href="/addContact") Add new contact
     br
     a(href="/logout") Logout
+    each contact2 in contact_data
+      p(id="birthday") #{((new Date().toJSON().slice(6,10) == contact2.birthday.slice(6,10))?"It's  "+contact2.name+"'s birthday!":"")} 

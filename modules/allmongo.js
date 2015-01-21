@@ -260,5 +260,4 @@ exports.editContact = function(req,res) {
             res.render('newcontact',data);
         }
     });
-
 }
