@@ -22,7 +22,7 @@ block content
               td #{contact.phone}
               td #{contact.birthday}
               td #{contact.general}
-        //img(src="/showImage?id=#{contact._id}")
+        img(src="/showImage?id=#{contact._id}",height="120",weight="100")
         br
         a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
         &nbsp;&nbsp;

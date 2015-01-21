@@ -274,21 +274,25 @@ exports.editContact = function(req,res) {
 }
 
 exports.showImage = function(req,res) {
-    console.log("SHOW IMAGE START:");
     
     if(req.session.username) {
         contactModel.findById(req.query.id, function(err, data) {
             if(err) {
-                res.render('error',{
-                    message: err.message,
-                    error: err
-                }); 
+                console.log(err);
             }
             else {
-                console.log("DATA:");
-                console.log(data);
-                console.log(path.join(__dirname, '../pictures/', data.picture));
-                res.sendFile(path.join(__dirname, '../pictures/'), data.picture);
+                var options = {
+                    root: __dirname + '/../pictures/'
+                };
+                
+                res.sendFile(data.picture, options, function (err) {
+                    if (err) {
+                        console.log(err);
+                    }
+                    else {
+                        console.log('Sent:', data.picture);
+                    }
+                });
             }
         });
     
