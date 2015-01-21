@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var path = require('path');
 
 var uri = "mongodb://localhost/addressbook/users";
 
@@ -27,7 +28,7 @@ var contactSchema = new mongoose.Schema({
     address: String,
     email: String,
     phone: String,
-    //birthday: Date,
+    picture: String,
     birthday: String,
     general: String
 });
@@ -154,13 +155,23 @@ exports.saveContact = function(req, res) {
         }
         // Create new contact
         else {
+            //var imagePath = path.join(__dirname, '/pictures/')
+            if(req.files.picture) {
+                var picName = req.files.picture.name;
+            }
+            else {
+                var picName = "no_image.jpg";
+            }
+            
+            console.log("Picture name:");
+            console.log(picName);
             var contact = new contactModel({
                 user: req.session.username,
                 name: req.body.name,
                 address: req.body.address,
                 email: req.body.email,
                 phone: req.body.phonenumber,
-                //birthday: new Date(req.body.birthday),
+                picture: picName,
                 birthday: req.body.birthday,
                 general: req.body.general
             });
@@ -261,3 +272,27 @@ exports.editContact = function(req,res) {
         }
     });
 }
+
+exports.showImage = function(req,res) {
+    console.log("SHOW IMAGE START:");
+    
+    if(req.session.username) {
+        contactModel.findById(req.query.id, function(err, data) {
+            if(err) {
+                res.render('error',{
+                    message: err.message,
+                    error: err
+                }); 
+            }
+            else {
+                console.log("DATA:");
+                console.log(data);
+                console.log(path.join(__dirname, '../pictures/', data.picture));
+                res.sendFile(path.join(__dirname, '../pictures/'), data.picture);
+            }
+        });
+    
+    
+    }
+}
+

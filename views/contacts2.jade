@@ -22,6 +22,8 @@ block content
               td #{contact.phone}
               td #{contact.birthday}
               td #{contact.general}
+        //img(src="/showImage?id=#{contact._id}")
+        br
         a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
         &nbsp;&nbsp;
         a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete

@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multer  = require('multer')
 
 var routes = require('./routes/index');
 
@@ -21,6 +22,9 @@ app.set('view engine', 'jade');
 
 // express-session setup
 app.use(session({secret: '123x456y789', resave: false, saveUninitialized: true}));
+
+// multer setup
+app.use(multer({ dest: './pictures/'}))
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -41,7 +45,8 @@ app.use('/contacts', db.contacts);
 app.use('/logout', db.logout);
 app.use('/editContact', db.editContact);
 app.use('/deleteContact', db.deleteContact);
-app.use('/contactInfo', db.contactInfo);
+//app.use('/contactInfo', db.contactInfo);
+app.use('/showImage', db.showImage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
