@@ -1,20 +1,31 @@
 extends layout
 
 block content
-  h1 Contacts
-  input(type='text',data-type='search',id='test')
-  each contact in contact_data
-    div(data-role="collapsible",data-filter="true",data-input='#test')
-      h3= contact.name
-      p Address: #{contact.address}
-      p eMail: #{contact.email}
-      p Phone number: #{contact.phone}
-      p Birthday: #{contact.birthday}
-      p General info: #{contact.general}
-      a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
-      br
-      a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete
-  br
-  a(href="/addContact") Add new contact
-  br
-  a(href="/logout") Logout
+  div(class="container")
+    h1 My Contacts
+    input(type='text',data-type='search',id='test')
+    each contact in contact_data
+      div(data-role="collapsible",data-filter="true",data-input='#test')
+        h3= contact.name
+        table(data-role='table',data-mode='reflow',class='uiuiui')
+          thead
+            tr
+              th Address
+              th Email
+              th Phone
+              th Birthday
+              th Other
+          tbody
+            tr
+              td #{contact.address}
+              td #{contact.email}
+              td #{contact.phone}
+              td #{contact.birthday}
+              td #{contact.general}
+        a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
+        &nbsp;&nbsp;
+        a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete
+    br
+    a(href="/addContact") Add new contact
+    br
+    a(href="/logout") Logout
