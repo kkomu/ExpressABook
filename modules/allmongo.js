@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var email = require("emailjs/email");
 
 var uri = "mongodb://localhost/addressbook/users";
 
@@ -32,6 +33,14 @@ var contactSchema = new mongoose.Schema({
     general: String
 });
 var contactModel = mongoose.model("Contacts", contactSchema);
+
+// Configure email server
+var server = email.server.connect({
+   user:    "erkki.veijola@gmail.com", 
+   password:"testi1234", 
+   host:    "smtp.gmail.com", 
+   tls:     true
+});
 
 // Login user if he/she is registered
 exports.login = function(req,res) {
@@ -278,10 +287,17 @@ exports.showImage = function(req,res) {
 // Send email
 exports.sendEmail = function(req,res) {
     console.log("Send email");
-    console.log(req.body);
+    console.log(req.body.to);
+    console.log(req.body.message);
+    var emailData = {
+        text: req.body.message, 
+        from: "birthdayboy@contacts.com", 
+        to: req.body.to,
+        subject: "Greetings from contacts application"
+    };
     
-    
-    
-
-
+    server.send(emailData, function(err, message) { 
+        console.log(err || message);
+    });
+    res.redirect('/contacts');
 }
