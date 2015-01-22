@@ -82,9 +82,7 @@ exports.contacts = function(req,res) {
             }
             else {
                 console.log(data);
-                // Render alternative contacts view. Use 'contacts' for standard
-                res.render('contacts2',{contact_data:data});
-                //res.render('contacts',{contact_data:data});
+                res.render('contacts',{contact_data:data});
             }
         });
     }
@@ -150,7 +148,6 @@ exports.saveContact = function(req, res) {
                     console.log("OK");
                     res.redirect('/contacts');
                 }
-            
             });
         }
         // Create new contact
@@ -230,24 +227,6 @@ exports.deleteContact = function(req, res) {
                 }
                 
             });
-        }
-    });
-}
-
-// Show contact information
-exports.contactInfo = function(req,res) {
-    console.log(req.query.id);
-    contactModel.findById(req.query.id, function(err, data) {
-        if(err) {
-            console.log(err);
-            res.render('error',{
-                message: err.message,
-                error: err
-            });
-        }
-        else {
-            console.log(data);
-            res.render('contactinfo',data);
         }
     });
 }

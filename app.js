@@ -45,7 +45,6 @@ app.use('/contacts', db.contacts);
 app.use('/logout', db.logout);
 app.use('/editContact', db.editContact);
 app.use('/deleteContact', db.deleteContact);
-//app.use('/contactInfo', db.contactInfo);
 app.use('/showImage', db.showImage);
 
 // catch 404 and forward to error handler
