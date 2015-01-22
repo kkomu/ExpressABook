@@ -25,12 +25,10 @@ block content
               td #{contact.general}
         img(src="/showImage?id=#{contact._id}",height="120",weight="100")
         br
-        a(href="/editContact/?id=" + contact._id,data-ajax="false") Edit
-        &nbsp;&nbsp;
-        a(href="/deleteContact/?id=" + contact._id,data-ajax="false") Delete
+        a(href="/editContact/?id=" + contact._id,data-ajax="false",data-role="button",data-icon="gear",data-inline="true") Edit
+        a(href="/deleteContact/?id=" + contact._id,data-ajax="false",data-role="button",data-icon="delete",data-inline="true") Delete
     br
-    a(href="/addContact") Add new contact
-    br
-    a(href="/logout") Logout
+    a(href="/addContact",data-role="button",data-icon="plus",data-inline="true") Add new contact
+    a(href="/logout",data-role="button",data-icon="back",data-inline="true") Logout
     each contact in contact_data
       p(id="birthday") #{((new Date().toJSON().slice(6,10) == contact.birthday.slice(6,10))?"It's  "+contact.name+"'s birthday!":"")} 
