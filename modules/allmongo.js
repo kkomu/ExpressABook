@@ -231,7 +231,6 @@ exports.deleteContact = function(req, res) {
                 
             });
         }
-        
     });
 }
 
@@ -273,8 +272,9 @@ exports.editContact = function(req,res) {
     });
 }
 
+// Read picture from db and send to html page
 exports.showImage = function(req,res) {
-    
+    console.log("Show image");
     if(req.session.username) {
         contactModel.findById(req.query.id, function(err, data) {
             if(err) {
@@ -295,8 +295,6 @@ exports.showImage = function(req,res) {
                 });
             }
         });
-    
-    
     }
 }
 

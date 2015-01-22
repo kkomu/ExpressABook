@@ -19,7 +19,8 @@ block content
       label Birthday:
       input(type="date",name="birthday",value=(birthday?birthday:""))
       br
-      input(type="file",name="picture",accept="image/*")
+      if !_id
+        input(type="file",name="picture",accept="image/*")
       label General information:
       textarea(name="general",rows="3")= (general?general:"")
       br
