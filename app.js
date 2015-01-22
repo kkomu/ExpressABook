@@ -24,7 +24,7 @@ app.set('view engine', 'jade');
 app.use(session({secret: '123x456y789', resave: false, saveUninitialized: true}));
 
 // multer setup
-app.use(multer({ dest: './pictures/'}))
+app.use(multer({ dest: './pictures/'}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -38,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/register', routes);
 app.use('/addContact', routes);
+app.use('/email', routes);
 app.use('/registerUser', db.registerUser);
 app.use('/login', db.login);
 app.use('/saveContact', db.saveContact);
@@ -46,6 +47,7 @@ app.use('/logout', db.logout);
 app.use('/editContact', db.editContact);
 app.use('/deleteContact', db.deleteContact);
 app.use('/showImage', db.showImage);
+app.use('/sendEmail', db.sendEmail);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

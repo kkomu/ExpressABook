@@ -22,5 +22,8 @@ router.get('/addContact', function(req, res) {
   res.render('newcontact', {});
 });
 
+router.get('/email', function(req, res) {
+  res.render('email', {to: req.query.to});
+});
 
 module.exports = router;

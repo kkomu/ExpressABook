@@ -18,7 +18,8 @@ block content
           tbody
             tr
               td #{contact.address}
-              td #{contact.email}
+              td 
+                a(href="/email?to=#{contact.email}") #{contact.email}
               td #{contact.phone}
               td #{contact.birthday}
               td #{contact.general}

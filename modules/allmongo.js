@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var path = require('path');
 
 var uri = "mongodb://localhost/addressbook/users";
 
@@ -152,7 +151,7 @@ exports.saveContact = function(req, res) {
         }
         // Create new contact
         else {
-            //var imagePath = path.join(__dirname, '/pictures/')
+            console.log(req.body);
             if(req.files.picture) {
                 var picName = req.files.picture.name;
             }
@@ -234,7 +233,6 @@ exports.deleteContact = function(req, res) {
 // Edit contact information
 exports.editContact = function(req,res) {
     console.log("Edit");
-    //res.redirect('/contacts');
     contactModel.findById(req.query.id, function(err, data) {
         if(err) {
             console.log(err);
@@ -277,3 +275,13 @@ exports.showImage = function(req,res) {
     }
 }
 
+// Send email
+exports.sendEmail = function(req,res) {
+    console.log("Send email");
+    console.log(req.body);
+    
+    
+    
+
+
+}
